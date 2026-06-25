@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/datatomic-design-system-bfa30fdb-4d7e-4446-8f51-91f7e06430ba/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/datatomic-design-system-bfa30fdb-4d7e-4446-8f51-91f7e06430ba/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/datatomic-design-system-bfa30fdb-4d7e-4446-8f51-91f7e06430ba/tokens/effects.css">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    ::-webkit-scrollbar{height:10px;width:10px}
+    ::-webkit-scrollbar-thumb{background:#D5D9F5;border-radius:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:#F0F2FF;color:#1A1A2E;font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;padding:26px 24px 64px;">
+  <div style="max-width:1040px;margin:0 auto;">
+
+    <!-- ── HEADER ── -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid #E4E7FF;padding-bottom:22px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2D4BF0;">Orientation média</div>
+        <h1 style="font-size:30px;font-weight:700;letter-spacing:-.02em;margin:8px 0 0;line-height:1.1;">{{ meta.title }}</h1>
+        <div style="font-size:14px;color:#7B8BB2;margin-top:8px;">{{ meta.annonceur }} · {{ meta.zone }} · {{ meta.periode }}</div>
+      </div>
+      <div style="text-align:right;flex:none;">
+        <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7B8BB2;font-weight:600;">Budget à arbitrer</div>
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:4px;">{{ meta.budgetTxt }}</div>
+      </div>
+    </div>
+
+    <!-- ════ 01 — LA CIBLE ════ -->
+    <div style="display:flex;align-items:center;gap:14px;margin:34px 0 18px;">
+      <span style="font-size:13px;font-weight:700;color:#FFFFFF;background:#1A1A2E;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;flex:none;">01</span>
+      <h2 style="font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em;">La cible</h2>
+      <span style="font-size:12px;color:#7B8BB2;margin-left:2px;">SIMM-TGI · INSEE</span>
+      <div style="flex:1;height:1px;background:#E4E7FF;"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:16px;">
+      <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+        <div style="display:flex;align-items:center;gap:13px;">
+          <span style="width:46px;height:46px;border-radius:50%;background:#FF4576;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex:none;">FA</span>
+          <div>
+            <div style="font-size:17px;font-weight:700;line-height:1.2;">{{ cible.label }}</div>
+            <div style="font-size:12px;color:#7B8BB2;margin-top:2px;">{{ cible.age }} · {{ cible.split }}</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:#5A6485;line-height:1.6;margin:16px 0 16px;">{{ cible.portrait }}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <sc-for list="{{ cible.criteres }}" as="c" hint-placeholder-count="4">
+            <span style="font-size:12px;font-weight:600;color:#2D4BF0;background:#EEF0FF;border-radius:999px;padding:5px 12px;">{{ c }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px;">
+          <span style="font-size:13px;font-weight:600;">Sur-affinités de la cible</span>
+          <span style="font-size:11px;color:#7B8BB2;">indice base 100</span>
+        </div>
+        <sc-for list="{{ traits }}" as="t" hint-placeholder-count="4">
+          <div style="margin-top:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;margin-bottom:5px;">
+              <span style="color:#1A1A2E;font-weight:500;">{{ t.label }}</span>
+              <span style="font-weight:700;font-variant-numeric:tabular-nums;color:{{ t.color }};">{{ t.indice }}</span>
+            </div>
+            <div style="height:8px;background:#EEF1FB;border-radius:999px;overflow:hidden;">
+              <i style="display:block;height:100%;border-radius:999px;background:{{ t.color }};width:{{ t.barPct }}%;"></i>
+            </div>
+          </div>
+        </sc-for>
+        <div style="font-size:11px;color:#7B8BB2;margin-top:16px;">Indice &gt; 100 = la cible sur-consomme par rapport à la population générale.</div>
+      </div>
+    </div>
+
+    <!-- ════ 02 — LE TERRITOIRE ════ -->
+    <div style="display:flex;align-items:center;gap:14px;margin:36px 0 18px;">
+      <span style="font-size:13px;font-weight:700;color:#FFFFFF;background:#1A1A2E;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;flex:none;">02</span>
+      <h2 style="font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em;">Le territoire de diffusion</h2>
+      <span style="font-size:12px;color:#7B8BB2;margin-left:2px;">INSEE · bassins de population</span>
+      <div style="flex:1;height:1px;background:#E4E7FF;"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+        <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Schématisation du territoire</div>
+        <div style="position:relative;width:100%;">
+          <svg viewBox="{{ map.viewBox }}" style="width:100%;height:auto;display:block;">
+            <path d="{{ map.path }}" fill="#2D4BF0" fillOpacity="0.06" stroke="#9FB0E8" strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round"></path>
+            <sc-for list="{{ bubbles }}" as="b" hint-placeholder-count="6">
+              <circle cx="{{ b.cx }}" cy="{{ b.cy }}" r="{{ b.r }}" fill="#2D4BF0" fillOpacity="0.16" stroke="#2D4BF0" strokeWidth="1.5"></circle>
+              <circle cx="{{ b.cx }}" cy="{{ b.cy }}" r="2.5" fill="#2D4BF0"></circle>
+            </sc-for>
+          </svg>
+          <sc-for list="{{ bubbles }}" as="b" hint-placeholder-count="6">
+            <div style="position:absolute;left:{{ b.leftPct }}%;top:{{ b.namePct }}%;transform:translate(-50%,-50%);font-size:11px;font-weight:700;color:#1A1A2E;white-space:nowrap;pointer-events:none;">{{ b.short }}</div>
+            <div style="position:absolute;left:{{ b.leftPct }}%;top:{{ b.valPct }}%;transform:translate(-50%,-50%);font-size:10px;font-weight:600;color:#2D4BF0;white-space:nowrap;font-variant-numeric:tabular-nums;pointer-events:none;">{{ b.cibleTxt }}</div>
+          </sc-for>
+        </div>
+        <div style="font-size:11px;color:#7B8BB2;margin-top:8px;">Fond : région Grand Est · taille du cercle ∝ cible estimée · positions géographiques réelles.</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px;">
+          <span style="font-size:13px;font-weight:600;">Cible par bassin</span>
+          <span style="font-size:11px;color:#7B8BB2;font-variant-numeric:tabular-nums;">{{ territoire.cibleTotalTxt }} cible · {{ territoire.popTotalTxt }} hab.</span>
+        </div>
+        <sc-for list="{{ bassins }}" as="b" hint-placeholder-count="6">
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;margin-bottom:5px;">
+              <span style="font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ b.name }}</span>
+              <span style="color:#5A6485;font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;"><b style="color:#1A1A2E;">{{ b.cibleTxt }}</b> · {{ b.pctTxt }}</span>
+            </div>
+            <div style="height:8px;background:#EEF1FB;border-radius:999px;overflow:hidden;">
+              <i style="display:block;height:100%;border-radius:999px;background:#2D4BF0;width:{{ b.barPct }}%;"></i>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- ════ 03 — HABITUDES MÉDIA ════ -->
+    <div style="display:flex;align-items:center;gap:14px;margin:36px 0 18px;">
+      <span style="font-size:13px;font-weight:700;color:#FFFFFF;background:#1A1A2E;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;flex:none;">03</span>
+      <h2 style="font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em;">Habitudes de consommation média</h2>
+      <span style="font-size:12px;color:#7B8BB2;margin-left:2px;">SIMM-TGI · Kantar</span>
+      <div style="flex:1;height:1px;background:#E4E7FF;"></div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:600;">Matrice couverture × affinité</span>
+        <span style="font-size:11px;color:#7B8BB2;">Taille ∝ couverture · cadran haut-droit = à prioriser</span>
+      </div>
+      <div style="position:relative;width:100%;max-width:680px;margin:0 auto;">
+        <svg viewBox="0 0 520 360" style="width:100%;height:auto;display:block;">
+          <rect x="{{ quad.divX }}" y="{{ quad.padT }}" width="{{ quad.qW }}" height="{{ quad.qH }}" fill="#E9FBEF" opacity="0.5"></rect>
+          <sc-for list="{{ quad.gridY }}" as="g" hint-placeholder-count="4">
+            <line x1="{{ quad.padL }}" y1="{{ g.y }}" x2="{{ quad.right }}" y2="{{ g.y }}" stroke="#EEF1FB" strokeWidth="1"></line>
+          </sc-for>
+          <line x1="{{ quad.divX }}" y1="{{ quad.padT }}" x2="{{ quad.divX }}" y2="{{ quad.bottom }}" stroke="#C7CEEC" strokeWidth="1" strokeDasharray="4 4"></line>
+          <line x1="{{ quad.padL }}" y1="{{ quad.divY }}" x2="{{ quad.right }}" y2="{{ quad.divY }}" stroke="#C7CEEC" strokeWidth="1" strokeDasharray="4 4"></line>
+          <sc-for list="{{ quad.pts }}" as="p" hint-placeholder-count="9">
+            <circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ p.r }}" fill="{{ p.color }}" fillOpacity="0.18" stroke="{{ p.color }}" strokeWidth="1.5"></circle>
+            <circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="2.5" fill="{{ p.color }}"></circle>
+          </sc-for>
+        </svg>
+        <sc-for list="{{ quad.gridY }}" as="g" hint-placeholder-count="4">
+          <div style="position:absolute;left:{{ g.tickLeftPct }}%;top:{{ g.topPct }}%;transform:translate(-100%,-50%);font-size:10px;color:#9AA4C0;font-variant-numeric:tabular-nums;pointer-events:none;">{{ g.label }}</div>
+        </sc-for>
+        <sc-for list="{{ quad.gridX }}" as="g" hint-placeholder-count="3">
+          <div style="position:absolute;left:{{ g.leftPct }}%;top:{{ g.tickTopPct }}%;transform:translate(-50%,0);font-size:10px;color:#9AA4C0;font-variant-numeric:tabular-nums;pointer-events:none;">{{ g.label }}</div>
+        </sc-for>
+        <div style="position:absolute;left:{{ quad.prioLeftPct }}%;top:{{ quad.prioTopPct }}%;transform:translate(-100%,-50%);font-size:10px;font-weight:700;color:#16A34A;letter-spacing:.04em;white-space:nowrap;pointer-events:none;">À PRIORISER ↗</div>
+        <div style="position:absolute;left:{{ quad.yTitleLeftPct }}%;top:{{ quad.yTitleTopPct }}%;transform:translate(-100%,-50%);font-size:10px;font-weight:600;color:#7B8BB2;white-space:nowrap;pointer-events:none;">Indice d'affinité ↑</div>
+        <div style="position:absolute;left:50%;top:{{ quad.axisXTopPct }}%;transform:translate(-50%,-50%);font-size:10px;font-weight:600;color:#7B8BB2;white-space:nowrap;pointer-events:none;">Couverture sur la cible →</div>
+        <sc-for list="{{ quad.pts }}" as="p" hint-placeholder-count="9">
+          <div style="position:absolute;left:{{ p.leftPct }}%;top:{{ p.labelTopPct }}%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:#1A1A2E;white-space:nowrap;pointer-events:none;">{{ p.label }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:11px;color:#7B8BB2;justify-content:center;">
+        <span style="display:inline-flex;align-items:center;gap:5px;"><i style="width:9px;height:9px;border-radius:50%;background:#16A34A;"></i> Forte affinité (≥130)</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;"><i style="width:9px;height:9px;border-radius:50%;background:#2D4BF0;"></i> Affinité (110–129)</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;"><i style="width:9px;height:9px;border-radius:50%;background:#9AA4C0;"></i> Dans la moyenne</span>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);margin-top:14px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;">
+        <span style="font-size:13px;font-weight:600;">Consommation détaillée par média</span>
+        <span style="font-size:11px;color:#7B8BB2;">couverture · temps quotidien · indice d'affinité</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead><tr>
+          <th style="text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Média</th>
+          <th style="text-align:right;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Couverture</th>
+          <th style="text-align:right;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Temps / jour</th>
+          <th style="text-align:center;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Indice affinité</th>
+          <th style="text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;width:160px;">Affinité</th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ medias }}" as="m" hint-placeholder-count="9">
+            <tr style="transition:background .12s;" style-hover="background:#F7F8FF;">
+              <td style="padding:11px 8px;border-bottom:{{ m.border }};font-size:13px;font-weight:600;">{{ m.media }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ m.border }};font-size:13px;text-align:right;font-variant-numeric:tabular-nums;">{{ m.couvTxt }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ m.border }};font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:#5A6485;">{{ m.tempsTxt }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ m.border }};text-align:center;"><span style="display:inline-flex;min-width:34px;justify-content:center;font-weight:700;font-variant-numeric:tabular-nums;font-size:13px;padding:2px 8px;border-radius:6px;color:{{ m.color }};background:{{ m.bg }};">{{ m.indice }}</span></td>
+              <td style="padding:11px 8px;border-bottom:{{ m.border }};">
+                <div style="height:7px;background:#EEF1FB;border-radius:999px;overflow:hidden;"><i style="display:block;height:100%;border-radius:999px;background:{{ m.color }};width:{{ m.affBar }}%;"></i></div>
+              </td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ════ 04 — RECOMMANDATION ════ -->
+    <div style="display:flex;align-items:center;gap:14px;margin:36px 0 18px;">
+      <span style="font-size:13px;font-weight:700;color:#FFFFFF;background:#2D4BF0;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;flex:none;">04</span>
+      <h2 style="font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em;">Recommandation média</h2>
+      <span style="font-size:12px;color:#7B8BB2;margin-left:2px;">Plan justifié par l'étude</span>
+      <div style="flex:1;height:1px;background:#E4E7FF;"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px;">
+      <div>
+        <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7B8BB2;font-weight:600;">Scénario proposé</div>
+        <div style="font-size:17px;font-weight:700;letter-spacing:-.01em;margin-top:3px;">{{ reco.scenarioName }}</div>
+        <div style="font-size:12px;color:#7B8BB2;margin-top:2px;">{{ reco.scenarioTag }} · {{ reco.budgetTxt }} · {{ reco.leviersTxt }}</div>
+      </div>
+      <div style="display:inline-flex;gap:2px;background:#FFFFFF;border:1px solid #E4E7FF;border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+        <sc-if value="{{ reco.aActive }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ reco.onPillA }}" style="font-family:inherit;font-weight:600;font-size:13px;border:none;padding:8px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;background:#1A1A2E;color:#FFFFFF;">{{ reco.pillALabel }}</button>
+        </sc-if>
+        <sc-if value="{{ reco.aInactive }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ reco.onPillA }}" style="font-family:inherit;font-weight:600;font-size:13px;border:none;padding:8px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;background:transparent;color:#5A6485;">{{ reco.pillALabel }}</button>
+        </sc-if>
+        <sc-if value="{{ reco.bActive }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ reco.onPillB }}" style="font-family:inherit;font-weight:600;font-size:13px;border:none;padding:8px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;background:#1A1A2E;color:#FFFFFF;">{{ reco.pillBLabel }}</button>
+        </sc-if>
+        <sc-if value="{{ reco.bInactive }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ reco.onPillB }}" style="font-family:inherit;font-weight:600;font-size:13px;border:none;padding:8px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;background:transparent;color:#5A6485;">{{ reco.pillBLabel }}</button>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);margin-bottom:14px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:600;">Répartition du budget par objectif</span>
+        <span style="font-size:11px;color:#7B8BB2;">funnel : notoriété → branding → conversion</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
+        <div style="position:relative;flex:none;">
+          <svg viewBox="0 0 200 200" style="width:172px;height:172px;display:block;">
+            <sc-for list="{{ reco.objArcs }}" as="a" hint-placeholder-count="3">
+              <path d="{{ a.d }}" fill="none" stroke="{{ a.color }}" strokeWidth="18" strokeLinecap="round"></path>
+            </sc-for>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+            <div style="font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1;">{{ reco.objTopPctTxt }}</div>
+            <div style="font-size:11px;color:#7B8BB2;margin-top:3px;">{{ reco.objTopLabel }}</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:240px;">
+          <sc-for list="{{ reco.objSplit }}" as="o" hint-placeholder-count="3">
+            <div style="margin-bottom:14px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:5px;">
+                <span style="width:10px;height:10px;border-radius:3px;background:{{ o.donut }};flex:none;"></span>
+                <span style="font-weight:600;">{{ o.label }}</span>
+                <span style="margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;">{{ o.pctTxt }}</span>
+                <span style="font-size:11px;color:#7B8BB2;font-variant-numeric:tabular-nums;width:78px;text-align:right;white-space:nowrap;">{{ o.eurosTxt }}</span>
+              </div>
+              <div style="height:7px;background:#EEF1FB;border-radius:999px;overflow:hidden;">
+                <i style="display:block;height:100%;border-radius:999px;background:{{ o.donut }};width:{{ o.barPct }}%;"></i>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);">
+      <sc-for list="{{ reco.items }}" as="r" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:170px 70px 1fr;align-items:center;gap:16px;padding:13px 0;border-bottom:{{ r.border }};">
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:0;">
+            <div style="display:flex;align-items:center;gap:9px;min-width:0;">
+              <span style="width:10px;height:10px;border-radius:3px;background:{{ r.color }};flex:none;"></span>
+              <span style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.levier }}</span>
+            </div>
+            <span style="align-self:flex-start;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;color:{{ r.objColor }};background:{{ r.objBg }};">{{ r.objLabel }}</span>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1;">{{ r.pctTxt }}</div>
+            <div style="font-size:11px;color:#7B8BB2;font-variant-numeric:tabular-nums;margin-top:2px;white-space:nowrap;">{{ r.eurosTxt }}</div>
+          </div>
+          <div>
+            <div style="height:8px;background:#EEF1FB;border-radius:999px;overflow:hidden;margin-bottom:6px;">
+              <i style="display:block;height:100%;border-radius:999px;background:{{ r.color }};width:{{ r.barPct }}%;"></i>
+            </div>
+            <div style="font-size:12px;color:#5A6485;line-height:1.45;">{{ r.just }}</div>
+          </div>
+        </div>
+      </sc-for>
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-top:14px;font-size:13px;color:#7B8BB2;">
+        <span>Budget total réparti</span><b style="color:#1A1A2E;font-variant-numeric:tabular-nums;font-size:15px;">{{ meta.budgetTxt }}</b>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E7FF;border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(45,75,240,0.06);margin-top:14px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;">
+        <span style="font-size:13px;font-weight:600;">Potentiel d'audience par régie</span>
+        <span style="font-size:11px;color:#7B8BB2;">sur la zone de diffusion</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;">
+        <thead><tr>
+          <th style="text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Levier</th>
+          <th style="text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Régie</th>
+          <th style="text-align:right;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Audience cible</th>
+          <th style="text-align:center;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Couverture</th>
+          <th style="text-align:center;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#7B8BB2;font-weight:600;padding:8px;border-bottom:1px solid #E4E7FF;">Affinité</th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ regies }}" as="r" hint-placeholder-count="7">
+            <tr style="transition:background .12s;" style-hover="background:#F7F8FF;">
+              <td style="padding:11px 8px;border-bottom:{{ r.border }};font-size:13px;font-weight:600;"><span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:{{ r.color }};flex:none;"></span>{{ r.levier }}</span></td>
+              <td style="padding:11px 8px;border-bottom:{{ r.border }};font-size:13px;color:#5A6485;">{{ r.regie }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ r.border }};font-size:13px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;">{{ r.audienceTxt }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ r.border }};font-size:13px;text-align:center;font-variant-numeric:tabular-nums;color:#5A6485;">{{ r.couvTxt }}</td>
+              <td style="padding:11px 8px;border-bottom:{{ r.border }};text-align:center;"><span style="display:inline-flex;min-width:34px;justify-content:center;font-weight:700;font-variant-numeric:tabular-nums;font-size:13px;padding:2px 8px;border-radius:6px;color:{{ r.affColor }};background:{{ r.affBg }};">{{ r.affinite }}</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:2400}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+
+    this.META = {
+      title: "Lancement été 2026",
+      annonceur: "Grand Est Loisirs",
+      zone: "Grand Est — 6 bassins",
+      periode: "Vague juin → août 2026"
+    };
+
+    this.CIBLE = {
+      label: "Familles actives périurbaines",
+      age: "30–49 ans · âge médian 41 ans",
+      split: "54 % femmes / 46 % hommes",
+      portrait: "Couples avec enfants, CSP+, habitant les couronnes périurbaines. Mobiles, connectés, planifient leurs sorties et courts-séjours en ligne. Désertent la TV linéaire au profit de la vidéo à la demande et du replay.",
+      criteres: ["CSP+ · cadres & prof. interm.", "Foyer avec enfants", "Habitat périurbain", "Sorties & loisirs réguliers"]
+    };
+
+    this.TRAITS = [
+      { label: "Sorties en famille", indice: 168 },
+      { label: "Court-séjour régional", indice: 144 },
+      { label: "Achats de loisirs en ligne", indice: 152 },
+      { label: "Parcs & activités de plein air", indice: 137 }
+    ];
+
+    // lon/lat = coordonnées géographiques réelles (projetées sur le fond de carte)
+    this.BASSINS = [
+      { name: "Eurométropole de Strasbourg", short: "Strasbourg", pop: 511, cible: 96, lon: 7.75, lat: 48.58 },
+      { name: "Grand Reims",                 short: "Reims",      pop: 295, cible: 52, lon: 4.03, lat: 49.26 },
+      { name: "Grand Nancy",                 short: "Nancy",      pop: 256, cible: 49, lon: 6.18, lat: 48.69 },
+      { name: "Metz Métropole",              short: "Metz",       pop: 222, cible: 41, lon: 6.18, lat: 49.12 },
+      { name: "Mulhouse Alsace Agglo",       short: "Mulhouse",   pop: 274, cible: 47, lon: 7.34, lat: 47.75 },
+      { name: "Épinal / Vosges centrale",    short: "Épinal",     pop: 110, cible: 17, lon: 6.45, lat: 48.17 }
+    ];
+
+    // Contour simplifié de la région Grand Est [lon, lat], sens horaire depuis le saillant des Ardennes
+    this.GE_BORDER = [
+      [4.79, 50.09], [4.86, 49.94], [4.68, 49.79], [5.15, 49.70], [5.45, 49.55],
+      [5.82, 49.55], [6.36, 49.47], [6.58, 49.22], [6.86, 49.18], [7.05, 49.10],
+      [7.45, 49.10], [7.63, 49.05], [8.00, 48.99], [8.23, 48.97], [8.20, 48.74],
+      [7.80, 48.58], [7.58, 48.32], [7.55, 48.00], [7.58, 47.70], [7.52, 47.45],
+      [7.10, 47.50], [6.60, 47.55], [6.10, 47.55], [5.70, 47.62], [5.45, 47.65],
+      [5.10, 47.82], [4.75, 47.95], [4.55, 48.15], [4.30, 48.38], [3.95, 48.45],
+      [3.65, 48.55], [3.40, 48.70], [3.55, 49.05], [3.75, 49.35], [4.05, 49.55],
+      [4.30, 49.70], [4.20, 49.95], [4.45, 50.05]
+    ];
+
+    this.MEDIAS = [
+      { media: "Télévision",            short: "TV",      couv: 88, temps: 198, indice: 96 },
+      { media: "AVOD / CTV (replay)",   short: "AVOD",    couv: 56, temps: 47,  indice: 142 },
+      { media: "Réseaux sociaux",       short: "Social",  couv: 79, temps: 88,  indice: 131 },
+      { media: "Vidéo en ligne",        short: "YouTube", couv: 72, temps: 54,  indice: 124 },
+      { media: "Radio",                 short: "Radio",   couv: 74, temps: 121, indice: 108 },
+      { media: "Audio digital / podcast", short: "Audio", couv: 38, temps: 34,  indice: 137 },
+      { media: "Presse & magazines",    short: "Presse",  couv: 45, temps: 26,  indice: 88 },
+      { media: "Affichage / DOOH",      short: "DOOH",    couv: 92, temps: null, indice: 118 },
+      { media: "Search",                short: "Search",  couv: 83, temps: null, indice: 121 }
+    ];
+
+    this.REGIES = [
+      { levier: "DOOH",            regie: "JCDecaux",              audience: 277, couv: 92, affinite: 118 },
+      { levier: "Search",         regie: "Google Ads",            audience: 250, couv: 83, affinite: 121 },
+      { levier: "Social (Meta)",  regie: "Meta",                  audience: 238, couv: 79, affinite: 131 },
+      { levier: "Vidéo / YouTube", regie: "Google",               audience: 216, couv: 72, affinite: 124 },
+      { levier: "Radio",          regie: "NRJ Global",            audience: 223, couv: 74, affinite: 108 },
+      { levier: "AVOD / CTV",     regie: "FranceTV Pub · M6 Pub", audience: 169, couv: 56, affinite: 142 },
+      { levier: "Audio digital",  regie: "Spotify Ads",           audience: 115, couv: 38, affinite: 137 }
+    ];
+
+    // Deux recommandations au choix : budgets et partis pris différents
+    this.RECO_SCENARIOS = {
+      A: {
+        name: "Couverture large", tag: "Notoriété & reach", budget: 480000,
+        items: [
+          { levier: "DOOH",            pct: 24, color: "#E60023", just: "92 % de couverture sur les bassins : ancrage local et reach massif." },
+          { levier: "AVOD / CTV",      pct: 22, color: "#7C3AED", just: "Vidéo premium grand public, affinité 142." },
+          { levier: "Social (Meta)",   pct: 20, color: "#0668E1", just: "Reach social large + ciblage périurbain." },
+          { levier: "Vidéo / YouTube", pct: 16, color: "#EA4335", just: "Complément vidéo, forte couverture 30–49 ans." },
+          { levier: "Radio",           pct: 10, color: "#C8A200", just: "Couverture additionnelle en mobilité." },
+          { levier: "Search",          pct: 8,  color: "#34A853", just: "Captation de la demande générée." }
+        ]
+      },
+      B: {
+        name: "Performance & affinité", tag: "Conversion & coût/contact", budget: 300000,
+        items: [
+          { levier: "AVOD / CTV",      pct: 28, color: "#7C3AED", just: "Affinité maximale (142), format vidéo engageant." },
+          { levier: "Social (Meta)",   pct: 26, color: "#0668E1", just: "Ciblage fin + retargeting, meilleur coût/contact." },
+          { levier: "Search",          pct: 18, color: "#34A853", just: "Bas de funnel : capte l'intention de réservation." },
+          { levier: "Vidéo / YouTube", pct: 16, color: "#EA4335", just: "Vidéo affinitaire, complément de Social." },
+          { levier: "Audio digital",   pct: 12, color: "#1DB954", just: "Affinité 137, contexte mobilité et trajets famille." }
+        ]
+      }
+    };
+
+    this.state = { scenario: "A" };
+
+    // Objectif marketing de chaque levier (funnel)
+    this.OBJ = {
+      notoriete:  { label: "Notoriété",  color: "#C2410C", bg: "#FFF1E8", donut: "#F97316" },
+      branding:   { label: "Branding",   color: "#6D28D9", bg: "#F1ECFE", donut: "#7C3AED" },
+      conversion: { label: "Conversion", color: "#16A34A", bg: "#E9FBEF", donut: "#16A34A" }
+    };
+    this.OBJ_ORDER = ["notoriete", "branding", "conversion"];
+    this.OBJ_OF = {
+      "DOOH": "notoriete", "Radio": "notoriete",
+      "AVOD / CTV": "branding", "Vidéo / YouTube": "branding", "Audio digital": "branding",
+      "Social (Meta)": "conversion", "Search": "conversion"
+    };
+  }
+
+  // arcs de donut (langage Datatomic)
+  mkDonut(items, cx, cy, r) {
+    const total = items.reduce((a, d) => a + d.value, 0);
+    if (!total) return [];
+    const arcs = []; let angle = -Math.PI / 2; const gap = 0.09;
+    items.forEach(d => {
+      const slice = d.value / total * Math.PI * 2;
+      if (slice < gap * 1.2) { angle += slice; return; }
+      const a1 = angle + gap / 2, a2 = angle + slice - gap / 2;
+      const large = (a2 - a1) > Math.PI ? 1 : 0;
+      arcs.push({
+        d: "M" + (cx + r * Math.cos(a1)).toFixed(2) + "," + (cy + r * Math.sin(a1)).toFixed(2) +
+           " A" + r + "," + r + " 0 " + large + " 1 " + (cx + r * Math.cos(a2)).toFixed(2) + "," + (cy + r * Math.sin(a2)).toFixed(2),
+        color: d.color
+      });
+      angle += slice;
+    });
+    return arcs;
+  }
+
+  fmt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "\u202F"); }
+
+  affBand(idx) {
+    if (idx >= 130) return { color: "#16A34A", bg: "#E9FBEF" };
+    if (idx >= 110) return { color: "#2D4BF0", bg: "#EEF0FF" };
+    if (idx >= 96)  return { color: "#5A6485", bg: "#F1F3F9" };
+    return { color: "#C2410C", bg: "#FFF1E8" };
+  }
+  quadColor(idx) {
+    if (idx >= 130) return "#16A34A";
+    if (idx >= 110) return "#2D4BF0";
+    return "#9AA4C0";
+  }
+
+  renderVals() {
+    const scKey = this.state.scenario === "B" ? "B" : "A";
+    const sc = this.RECO_SCENARIOS[scKey];
+    const budget = sc.budget;
+
+    const meta = {
+      title: this.META.title, annonceur: this.META.annonceur, zone: this.META.zone, periode: this.META.periode,
+      budgetTxt: this.fmt(budget) + " €"
+    };
+
+    const cible = this.CIBLE;
+    const maxIndice = 175;
+    const traits = this.TRAITS.map(t => {
+      const b = this.affBand(t.indice);
+      return { label: t.label, indice: t.indice, color: b.color, barPct: Math.round(t.indice / maxIndice * 100) };
+    });
+
+    const popTotal = this.BASSINS.reduce((a, b) => a + b.pop, 0);
+    const cibleTotal = this.BASSINS.reduce((a, b) => a + b.cible, 0);
+    const maxCible = Math.max(...this.BASSINS.map(b => b.cible));
+    const territoire = {
+      count: this.BASSINS.length,
+      popTotalTxt: this.fmt(popTotal * 1000),
+      cibleTotalTxt: this.fmt(cibleTotal * 1000),
+      tauxTxt: Math.round(cibleTotal / popTotal * 100) + " %"
+    };
+    const bassins = this.BASSINS.slice().sort((a, b) => b.cible - a.cible).map((b, i, arr) => ({
+      name: b.name, short: b.short,
+      popTxt: this.fmt(b.pop * 1000), cibleTxt: this.fmt(b.cible * 1000),
+      pctTxt: Math.round(b.cible / cibleTotal * 100) + " %",
+      barPct: Math.round(b.cible / maxCible * 100),
+      border: i === arr.length - 1 ? "none" : "1px solid #E4E7FF"
+    }));
+
+    // ── projection géographique (équirectangulaire) du Grand Est ──
+    const border = this.GE_BORDER;
+    const lons = border.map(p => p[0]), lats = border.map(p => p[1]);
+    const lonMin = Math.min(...lons), lonMax = Math.max(...lons);
+    const latMin = Math.min(...lats), latMax = Math.max(...lats);
+    const kx = Math.cos((latMin + latMax) / 2 * Math.PI / 180);
+    const mapW = 460, pad = 24, topPad = 18, botPad = 32, drawW = mapW - 2 * pad;
+    const geoW = (lonMax - lonMin) * kx, geoH = latMax - latMin;
+    const scale = drawW / geoW;
+    const mapVbH = Math.round(topPad + geoH * scale + botPad);
+    const projX = lon => pad + (lon - lonMin) * kx * scale;
+    const projY = lat => topPad + (latMax - lat) * scale;
+    const map = {
+      path: "M" + border.map(p => projX(p[0]).toFixed(1) + "," + projY(p[1]).toFixed(1)).join(" L") + " Z",
+      viewBox: "0 0 " + mapW + " " + mapVbH
+    };
+    const cLat = (latMin + latMax) / 2;
+    const bubbles = this.BASSINS.map(b => {
+      const cx = projX(b.lon), cy = projY(b.lat);
+      const r = 11 + Math.sqrt(b.cible / maxCible) * 26;
+      const above = b.lat >= cLat;              // étiquette vers l'extérieur de la région
+      const labelY = above ? cy - r - 14 : cy + r + 14;
+      const valY = above ? cy - r - 2 : cy + r + 26;
+      return { short: b.short, cibleTxt: this.fmt(b.cible * 1000),
+        cx: Math.round(cx), cy: Math.round(cy), r: Math.round(r),
+        leftPct: +(cx / mapW * 100).toFixed(2),
+        namePct: +(labelY / mapVbH * 100).toFixed(2),
+        valPct: +(valY / mapVbH * 100).toFixed(2) };
+    });
+
+    const medias = this.MEDIAS.map((m, i, arr) => {
+      const b = this.affBand(m.indice);
+      return { media: m.media, short: m.short,
+        couvTxt: m.couv + " %",
+        tempsTxt: m.temps == null ? "—" : m.temps + " min",
+        indice: m.indice, color: b.color, bg: b.bg,
+        affBar: Math.round(m.indice / maxIndice * 100),
+        border: i === arr.length - 1 ? "none" : "1px solid #E4E7FF" };
+    });
+
+    // ── quadrant ──
+    const W = 520, H = 360, padL = 52, padR = 26, padT = 26, padB = 46;
+    const right = W - padR, bottom = H - padB;
+    const xMin = 30, xMax = 95, yMin = 80, yMax = 150;
+    const xFor = c => padL + (c - xMin) / (xMax - xMin) * (right - padL);
+    const yFor = v => bottom - (v - yMin) / (yMax - yMin) * (bottom - padT);
+    const divX = xFor(70), divY = yFor(110);
+    const pX = v => +(v / W * 100).toFixed(2);
+    const pY = v => +(v / H * 100).toFixed(2);
+    const gridY = [80, 100, 120, 140].map(v => ({ y: Math.round(yFor(v)), label: String(v),
+      tickLeftPct: pX(padL - 5), topPct: pY(yFor(v)) }));
+    const gridX = [40, 60, 80].map(c => ({ x: Math.round(xFor(c)), label: c + " %",
+      leftPct: pX(xFor(c)), tickTopPct: pY(H - padB + 7) }));
+    const quadPts = this.MEDIAS.map(m => {
+      const cx = xFor(m.couv), cy = yFor(m.indice);
+      const r = 9 + (m.couv / 100) * 16;
+      return { label: m.short, color: this.quadColor(m.indice),
+        cx: Math.round(cx), cy: Math.round(cy), r: Math.round(r),
+        leftPct: pX(cx), labelTopPct: pY(cy - r - 8) };
+    });
+    const quad = {
+      pts: quadPts, gridY, gridX,
+      padL, padT, right, bottom,
+      divX: Math.round(divX), divY: Math.round(divY),
+      qW: Math.round(right - divX), qH: Math.round(divY - padT),
+      prioLeftPct: pX(right), prioTopPct: pY(padT - 4),
+      yTitleLeftPct: pX(padL - 5), yTitleTopPct: pY(padT - 16),
+      axisXTopPct: pY(H - 4)
+    };
+
+    const regieColor = {
+      "DOOH": "#E60023", "Search": "#34A853", "Social (Meta)": "#0668E1",
+      "Vidéo / YouTube": "#EA4335", "Radio": "#C8A200", "AVOD / CTV": "#7C3AED", "Audio digital": "#1DB954"
+    };
+    const regies = this.REGIES.map((r, i, arr) => {
+      const b = this.affBand(r.affinite);
+      return { levier: r.levier, regie: r.regie,
+        audienceTxt: this.fmt(r.audience * 1000),
+        couvTxt: r.couv + " %", affinite: r.affinite,
+        affColor: b.color, affBg: b.bg, color: regieColor[r.levier] || "#2D4BF0",
+        border: i === arr.length - 1 ? "none" : "1px solid #E4E7FF" };
+    });
+
+    const maxPct = Math.max(...sc.items.map(r => r.pct));
+    const recoItems = sc.items.map((r, i, arr) => {
+      const ob = this.OBJ[this.OBJ_OF[r.levier]] || this.OBJ.branding;
+      return {
+        levier: r.levier, color: r.color, just: r.just,
+        pctTxt: r.pct + " %",
+        eurosTxt: this.fmt(budget * r.pct / 100) + " €",
+        barPct: Math.round(r.pct / maxPct * 100),
+        objLabel: ob.label, objColor: ob.color, objBg: ob.bg,
+        border: i === arr.length - 1 ? "none" : "1px solid #E4E7FF"
+      };
+    });
+
+    // ── répartition du budget par objectif ──
+    const objAgg = this.OBJ_ORDER.map(key => {
+      const o = this.OBJ[key];
+      const pct = sc.items.filter(r => this.OBJ_OF[r.levier] === key).reduce((a, r) => a + r.pct, 0);
+      return { key, label: o.label, donut: o.donut, color: o.color, bg: o.bg, pct };
+    }).filter(o => o.pct > 0);
+    const objMax = Math.max(...objAgg.map(o => o.pct));
+    const objSplit = objAgg.map(o => ({
+      label: o.label, donut: o.donut, color: o.color, bg: o.bg,
+      pctTxt: o.pct + " %",
+      eurosTxt: this.fmt(budget * o.pct / 100) + " €",
+      barPct: Math.round(o.pct / objMax * 100)
+    }));
+    const topObj = objAgg.slice().sort((a, b) => b.pct - a.pct)[0];
+    const reco = {
+      items: recoItems,
+      objSplit,
+      objArcs: this.mkDonut(objAgg.map(o => ({ value: o.pct, color: o.donut })), 100, 100, 78),
+      objTopLabel: topObj ? topObj.label : "",
+      objTopPctTxt: topObj ? topObj.pct + " %" : "",
+      pillALabel: this.RECO_SCENARIOS.A.name, pillBLabel: this.RECO_SCENARIOS.B.name,
+      aActive: scKey === "A", aInactive: scKey !== "A",
+      bActive: scKey === "B", bInactive: scKey !== "B",
+      onPillA: () => this.setState({ scenario: "A" }),
+      onPillB: () => this.setState({ scenario: "B" }),
+      scenarioName: sc.name, scenarioTag: sc.tag,
+      budgetTxt: this.fmt(budget) + " €",
+      leviersTxt: sc.items.length + " leviers"
+    };
+
+    return { meta, cible, traits, territoire, bassins, bubbles, map, medias, quad, regies, reco };
+  }
+}
+</script>
+</body>
+</html>
