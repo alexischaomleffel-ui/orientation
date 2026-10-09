@@ -1,0 +1,68 @@
+/* ============================================================
+   DATATOMIC — COLORS
+   Base palette + semantic aliases. All values from brand guide.
+   ============================================================ */
+:root {
+  /* ---- Brand primary ---- */
+  --blue-500: #2D4BF0;   /* primary — CTA, filled buttons, active links */
+  --blue-700: #001d6c;   /* primary dark — hover, H1 emphasis (== ink) */
+  --blue-300: #3765fd;   /* light blue — informative icons, category badges */
+  --blue-050: #EEF0FF;   /* active nav background, subtle fills */
+
+  /* ---- Surfaces & lines ---- */
+  --lavender-050: #f4f5ff; /* global app background (blue-lavender, very light) */
+  --white:        #FFFFFF; /* sidebar, cards, tables */
+  --border:       #E4E7FF; /* separators, input outlines, table rules */
+  --border-soft:  #F0F2FF; /* faint row dividers inside tables */
+
+  /* ---- Text ---- */
+  --ink-900: #001d6c;     /* body, labels, section titles (deep navy) */
+  --ink-400: #7B8BB2;     /* secondary text, column headers, metadata */
+
+  /* ---- Accents / status ---- */
+  --orange-500: #FF4576;  /* dynamic avatars, highlights (pink-coral) */
+  --green-500:  #3be2c0;  /* active status, success, launch icons (mint) */
+  --red-500:    #EF4444;  /* errors */
+
+  /* Fixed status-badge fills (independent of the accent palette) */
+  --badge-beta: #2D4BF0;  /* BETA pill */
+  --badge-new:  #22C55E;  /* NEW pill */
+  --badge-tuto: #F97316;  /* Tuto pill */
+
+  /* Tinted backgrounds for status pills / icon tiles (pastel) */
+  --blue-tint:   #EEF0FF;
+  --orange-tint: #FFE6EC;
+  --green-tint:  #E2FAF4;
+  --red-tint:    #FDECEC;
+  --neutral-tint:#F1F3F9;
+
+  /* ============================================================
+     SEMANTIC ALIASES
+     ============================================================ */
+  --color-primary:        var(--blue-500);
+  --color-primary-hover:  var(--blue-700);
+  --color-primary-soft:   var(--blue-050);
+
+  --surface-app:     var(--lavender-050);
+  --surface-card:    var(--white);
+  --surface-sidebar: var(--white);
+  --surface-raised:  var(--white);
+
+  --border-default:  var(--border);
+  --border-strong:   #D5D9F5;
+
+  --text-primary:    var(--ink-900);
+  --text-secondary:  var(--ink-400);
+  --text-on-primary: var(--white);
+  --text-link:       var(--blue-500);
+
+  --status-success:  var(--green-500);
+  --status-success-bg: var(--green-tint);
+  --status-warning:  var(--orange-500);
+  --status-warning-bg: var(--orange-tint);
+  --status-error:    var(--red-500);
+  --status-error-bg: var(--red-tint);
+  --status-info:     var(--blue-300);
+  --status-info-bg:  var(--blue-tint);
+  --status-neutral-bg: var(--neutral-tint);
+}

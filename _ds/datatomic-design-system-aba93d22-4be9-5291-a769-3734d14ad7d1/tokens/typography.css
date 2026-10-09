@@ -1,0 +1,47 @@
+/* ============================================================
+   DATATOMIC — TYPOGRAPHY
+   One family: Plus Jakarta Sans (geometric sans). Never serif.
+   ============================================================ */
+:root {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans); /* single-family rule — display == UI */
+
+  /* ---- Font sizes (px-based scale) ---- */
+  --text-h1: 30px;   /* 28–32 */
+  --text-h2: 23px;   /* 22–24 */
+  --text-h3: 18px;
+  --text-body: 14px; /* 14–15 default UI */
+  --text-body-lg: 15px;
+  --text-sm: 13px;   /* secondary text */
+  --text-xs: 12px;   /* column labels */
+  --text-metric: 32px; /* KPI numbers 28–36 */
+
+  /* ---- Weights ---- */
+  --fw-regular: 400;   /* @kind font */
+  --fw-medium: 500;    /* @kind font */
+  --fw-semibold: 600;  /* @kind font */
+  --fw-bold: 700;      /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+
+  /* ---- Line heights ---- */
+  --lh-tight: 1.2;   /* @kind font */
+  --lh-snug: 1.35;   /* @kind font */
+  --lh-normal: 1.5;  /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-label: 0.06em;  /* uppercase table/column labels */
+  --ls-tight: -0.01em; /* large display numbers & headings */
+
+  /* Numbers: enable tabular figures for alignment in tables/KPIs */
+  --num-features: "tnum" 1, "lnum" 1; /* @kind other */
+}
+
+/* Base document type */
+html {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

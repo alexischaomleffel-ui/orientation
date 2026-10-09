@@ -1,0 +1,28 @@
+/* ============================================================
+   DATATOMIC — SPACING
+   Base unit = 8px. Everything is a multiple.
+   ============================================================ */
+:root {
+  --space-0: 0;
+  --space-1: 4px;   /* half-step */
+  --space-2: 8px;   /* base unit */
+  --space-3: 12px;
+  --space-4: 16px;  /* default gap between cards */
+  --space-5: 20px;
+  --space-6: 24px;  /* card padding / larger gap */
+  --space-8: 32px;  /* content padding */
+  --space-10: 40px; /* content padding (max) */
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Layout constants */
+  --sidebar-width: 270px;
+  --content-max: 1200px;
+  --content-pad: var(--space-8);
+
+  /* Component paddings */
+  --pad-card: var(--space-6);          /* 24px */
+  --pad-input: 10px 16px;
+  --pad-btn: 10px 20px;
+  --pad-btn-sm: 7px 14px;
+}

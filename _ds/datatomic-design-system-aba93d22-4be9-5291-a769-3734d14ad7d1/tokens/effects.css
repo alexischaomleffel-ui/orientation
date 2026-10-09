@@ -1,0 +1,34 @@
+/* ============================================================
+   DATATOMIC — EFFECTS
+   Radii, borders, shadows. Shadows are light & blue-tinted only.
+   Never thick or colored shadows. Never radius > 16px on cards.
+   ============================================================ */
+:root {
+  /* ---- Radii ---- */
+  --radius-sm: 6px;
+  --radius-btn: 8px;     /* buttons, inputs */
+  --radius-input: 8px;
+  --radius-card: 14px;   /* cards 12–16 */
+  --radius-card-lg: 16px;
+  --radius-pill: 999px;  /* avatars, status badges */
+
+  /* ---- Borders ---- */
+  --border-width: 1px;
+  --border-width-strong: 1.5px; /* secondary buttons */
+  --border-line: 1px solid var(--border-default);
+
+  /* ---- Shadows (subtle, blue-tinted) ---- */
+  --shadow-none: none;
+  --shadow-card: 0 2px 8px rgba(45, 75, 240, 0.06);
+  --shadow-raised: 0 4px 16px rgba(45, 75, 240, 0.10);
+  --shadow-popover: 0 8px 28px rgba(26, 26, 46, 0.12);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--color-primary);
+  --focus-ring-soft: 0 0 0 3px rgba(45, 75, 240, 0.20);
+
+  /* Motion — only user feedback, no superfluous animation */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur-base: 180ms; /* @kind other */
+}
